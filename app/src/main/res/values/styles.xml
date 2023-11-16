@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MainScreenGameItemTextView" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >22sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SongQuizSettingsTextView" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SongQuizSettingsTopicCheckedBox" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+
+
+</resources>

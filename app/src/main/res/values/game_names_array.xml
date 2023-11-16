@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gameNames">
+        <item>Звуковая викторина</item>
+        <item>Тест</item>
+    </string-array>
+</resources>

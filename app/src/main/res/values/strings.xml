@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Настольные игры: Звуковая викторина</string>
+    <string name="sq_topic_number">Количество тем: </string>
+    <string name="sq_card_number">Количество карточек: </string>
+    <string name="sq_chosen_topics">Выбрано %1$d из %2$d тем: </string>
+    <string name="sq_start">Начать</string>
+</resources>
