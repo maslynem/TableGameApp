@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.maslynem.domain.GetTopicListUseCase
 import ru.maslynem.domain.topic.Topic
+import ru.maslynem.domain.topic.TopicCheckBox
 
 class SongQuizSettingsViewModel : ViewModel() {
 
@@ -18,13 +19,9 @@ class SongQuizSettingsViewModel : ViewModel() {
     val cardNumber: LiveData<Int>
         get() = _cardNumber
 
-    private var _topicList = MutableLiveData<List<Topic>>()
-    val topicList: LiveData<List<Topic>>
-        get() = _topicList
-
-    private var _shouldDisableRecycleView = MutableLiveData<Boolean>()
-    val shouldDisableRecycleView: LiveData<Boolean>
-        get() = _shouldDisableRecycleView
+    private var _topicCheckBoxList = MutableLiveData<List<TopicCheckBox>>()
+    val topicCheckBoxList: LiveData<List<TopicCheckBox>>
+        get() = _topicCheckBoxList
 
     private var _shouldEnableStartBtn = MutableLiveData<Boolean>()
     val shouldEnableStartBtn: LiveData<Boolean>
@@ -34,42 +31,57 @@ class SongQuizSettingsViewModel : ViewModel() {
     val countOfSelectedTopics: LiveData<Int>
         get() = _countOfSelectedTopics
 
+    private var isTopicListEnabled: Boolean = true
+
     fun getTopicList() {
-        _topicList.value = getTopicListUseCase.getTopicList()
+        _topicCheckBoxList.value = getTopicListUseCase.getTopicList()
+            .map { topic: Topic -> TopicCheckBox(topic.name, selected = false, enabled = true) }
         _countOfSelectedTopics.value = 0
     }
 
-    fun onTopicItemClick(topic: Topic, isChecked: Boolean) {
-//        val isLimit = _countOfSelectedTopics.value!! >= _topicNumber.value!!
-//        _shouldShowLimitError.value = isChecked && isLimit
-//        if (!isChecked || !isLimit) {
-//            val find = _topicList.value?.find {
-//                it.name == topic.name
-//            }
-//            find?.selected = isChecked
-//            val value = _countOfSelectedTopics.value
-//
-//            _countOfSelectedTopics.value = if (isChecked) value?.plus(1)
-//            else value?.minus(1)
-//        }
-//        _shouldDisableStartBtn.value = _countOfSelectedTopics.value!! != _topicNumber.value!!
-//        return if (!isChecked || !isLimit) isChecked else false
-        val find = _topicList.value?.find {
-            it.name == topic.name
+    fun onTopicItemClick(topicCheckBox: TopicCheckBox, isChecked: Boolean) {
+        val find = _topicCheckBoxList.value?.find {
+            it.name == topicCheckBox.name
         }
-        find?.selected = !topic.selected
-        val value = _countOfSelectedTopics.value
+        find?.selected = !topicCheckBox.selected
 
-        _countOfSelectedTopics.value = if (isChecked) value?.plus(1)
-        else value?.minus(1)
-        _shouldDisableRecycleView.value = _countOfSelectedTopics.value!! >= _topicNumber.value!!
+        updateCountOfSelectedTopics(isChecked)
+
         _shouldEnableStartBtn.value = _countOfSelectedTopics.value!! == _topicNumber.value!!
+
+        checkEnableStateOfTopicList()
     }
 
+    private fun checkEnableStateOfTopicList() {
+        val isLimit = _countOfSelectedTopics.value!! >= _topicNumber.value!!
+        if (isLimit && isTopicListEnabled) {
+            changeEnableStateOfTopicList(false)
+            isTopicListEnabled = false
+        } else if (!isLimit && !isTopicListEnabled) {
+            changeEnableStateOfTopicList(true)
+            isTopicListEnabled = true
+        }
+    }
+
+    private fun changeEnableStateOfTopicList(enabled: Boolean) {
+        _topicCheckBoxList.value?.forEach {
+            if (!it.selected) {
+                it.enabled = enabled
+            }
+        }
+        _topicCheckBoxList.value = _topicCheckBoxList.value
+    }
+
+    private fun updateCountOfSelectedTopics(isChecked: Boolean) {
+        val value = _countOfSelectedTopics.value
+        _countOfSelectedTopics.value = if (isChecked) value?.plus(1)
+        else value?.minus(1)
+    }
 
     fun onTopicSpinnerItemSelectedClick(value: Int) {
         _topicNumber.value = value
-        _shouldEnableStartBtn.value = _countOfSelectedTopics.value!! != _topicNumber.value!!
+        _shouldEnableStartBtn.value = _countOfSelectedTopics.value!! == _topicNumber.value!!
+        checkEnableStateOfTopicList()
     }
 
 

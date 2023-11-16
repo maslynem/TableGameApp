@@ -2,29 +2,30 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="4dp"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/llGame"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@drawable/main_text_view_background"
+        android:background="@drawable/sq_check_box_enabled_background"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/game"
-            style="@style/MainScreenGameItemTextView"
+        <CheckBox
+            android:id="@+id/sq_cb_topic"
+            style="@style/SongQuizSettingsTopicCheckedBox"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry"
+            android:text="test"
+            />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

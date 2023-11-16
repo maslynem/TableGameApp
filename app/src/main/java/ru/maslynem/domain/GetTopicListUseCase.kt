@@ -8,17 +8,17 @@ class GetTopicListUseCase {
 
     init {
         topicList.apply {
-            add(Topic("Транспорт", false))
-            add(Topic("Природа", false))
-            add(Topic("Профессии", false))
-            add(Topic("Спорт", false))
-            add(Topic("Кинофильмы", false))
-            add(Topic("Аниме", false))
-            add(Topic("Аниме1", false))
-            add(Topic("Аниме2", false))
-            add(Topic("Аниме3", false))
-            add(Topic("Аниме4", false))
-            add(Topic("Аниме5", false))
+            add(Topic("Природа"))
+            add(Topic("Профессии"))
+            add(Topic("Транспорт"))
+            add(Topic("Спорт"))
+            add(Topic("Кинофильмы"))
+            add(Topic("Аниме"))
+            add(Topic("Аниме1"))
+            add(Topic("Аниме2"))
+            add(Topic("Аниме3"))
+            add(Topic("Аниме4"))
+            add(Topic("Аниме5"))
         }
     }
 

@@ -1,11 +1,12 @@
 package ru.maslynem.presentation.songQuizSettingActivity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ru.maslynem.mainactivity.R
@@ -107,23 +108,15 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          * Такое происходит, когда пользователь выбирает тему. Состояние темы меняется в списке,
          * обновленный список передается в адаптер recycler view
          **/
-        songQuizSettingsViewModel.topicList.observe(this) {
-            topicListAdapter.topicList = it
-        }
-
-        /**
-         * Если пользователь выбрал тем больше лимита, то показывается сообщение
-         **/
-        songQuizSettingsViewModel.shouldDisableRecycleView.observe(this) {
-            if (it)
-                Toast.makeText(this, "Limit is ${songQuizSettingsViewModel.topicNumber.value}", Toast.LENGTH_SHORT).show();
+        songQuizSettingsViewModel.topicCheckBoxList.observe(this) {
+            topicListAdapter.topicCheckBoxList = it
         }
 
         /**
          * Пока пользователь не выбрал нужное кол-во тем, кнопка заблокирована
          **/
         songQuizSettingsViewModel.shouldEnableStartBtn.observe(this) {
-            binding.sqBtnStartGame.isEnabled = !it
+            binding.sqBtnStartGame.isEnabled = it
         }
     }
 
