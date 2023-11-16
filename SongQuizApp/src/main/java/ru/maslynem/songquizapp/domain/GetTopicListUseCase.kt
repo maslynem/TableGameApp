@@ -1,6 +1,6 @@
-package ru.maslynem.domain
+package ru.maslynem.songquizapp.domain
 
-import ru.maslynem.domain.topic.Topic
+import ru.maslynem.songquizapp.domain.topic.Topic
 
 class GetTopicListUseCase {
 

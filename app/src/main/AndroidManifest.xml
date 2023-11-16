@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MainActivity"
         tools:targetApi="31">
         <activity
-            android:name="ru.maslynem.presentation.songQuizSettingActivity.SongQuizSettingsActivity"
+            android:name="ru.maslynem.songquizapp.presentation.SongQuizSettingsActivity"
             android:exported="false" />
         <activity
             android:name="ru.maslynem.presentation.mainactivity.MainScreenActivity"

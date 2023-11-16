@@ -3,6 +3,5 @@
     </style>
 
     <style name="Theme.MainActivity" parent="Base.Theme.MainActivity">
-        <item name="android:windowBackground">@drawable/app_background</item>
     </style>
 </resources>

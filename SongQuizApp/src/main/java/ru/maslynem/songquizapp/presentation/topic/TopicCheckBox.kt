@@ -1,4 +1,4 @@
-package ru.maslynem.domain.topic
+package ru.maslynem.songquizapp.presentation.topic
 
 data class TopicCheckBox(
     val name: String,

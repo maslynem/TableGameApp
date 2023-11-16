@@ -1,21 +1,21 @@
-package ru.maslynem.presentation.songQuizSettingActivity
+package ru.maslynem.songquizapp.presentation
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
-import ru.maslynem.mainactivity.R
-import ru.maslynem.domain.topic.TopicCheckBox
+import ru.maslynem.songquizapp.R
+import ru.maslynem.songquizapp.presentation.topic.TopicCheckBox
 
 class TopicListAdapter :
     RecyclerView.Adapter<TopicListAdapter.TopicViewHolder>() {
 
     var onTopicClick: ((TopicCheckBox, Boolean) -> Unit)? = null
     var topicCheckBoxList: List<TopicCheckBox> = listOf()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -25,8 +25,8 @@ class TopicListAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
         val layout = when (viewType) {
-            VIEW_TYPE_ENABLED -> R.layout.sq_topic_item_enabled
-            VIEW_TYPE_DISABLED -> R.layout.sq_topic_item_disabled
+            VIEW_TYPE_ENABLED -> R.layout.topic_item_enabled
+            VIEW_TYPE_DISABLED -> R.layout.topic_item_disabled
             else -> throw RuntimeException("Unknown view type $viewType")
         }
         val view = LayoutInflater.from(parent.context).inflate(

@@ -1,11 +1,11 @@
-package ru.maslynem.presentation.songQuizSettingActivity
+package ru.maslynem.songquizapp.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.domain.GetTopicListUseCase
-import ru.maslynem.domain.topic.Topic
-import ru.maslynem.domain.topic.TopicCheckBox
+import ru.maslynem.songquizapp.domain.GetTopicListUseCase
+import ru.maslynem.songquizapp.domain.topic.Topic
+import ru.maslynem.songquizapp.presentation.topic.TopicCheckBox
 
 class SongQuizSettingsViewModel : ViewModel() {
 

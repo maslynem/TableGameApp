@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.maslynem.presentation.songQuizSettingActivity.SongQuizSettingsActivity">
+    android:background="@drawable/song_quiz_app_background"
+    tools:context="ru.maslynem.songquizapp.presentation.SongQuizSettingsActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -21,13 +22,13 @@
 
         <TextView
             android:id="@+id/sq_tv_topic_number"
-            style="@style/SongQuizSettingsTextView"
+            style="@style/SettingsTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:text="@string/sq_topic_number"
+            android:text="@string/topic_number"
             tools:ignore="RtlSymmetry" />
 
         <Spinner
@@ -59,13 +60,13 @@
 
         <TextView
             android:id="@+id/sq_tv_card_number"
-            style="@style/SongQuizSettingsTextView"
+            style="@style/SettingsTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
-            android:text="@string/sq_card_number"
+            android:text="@string/card_number"
             tools:ignore="RtlSymmetry" />
 
         <Spinner
@@ -97,12 +98,12 @@
 
         <TextView
             android:id="@+id/sq_tv_chosen_topics"
-            style="@style/SongQuizSettingsTextView"
+            style="@style/SettingsTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center|center_vertical"
-            android:text="@string/sq_chosen_topics" />
+            android:text="@string/chosen_topics" />
     </LinearLayout>
 
     <Button
@@ -111,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:enabled="false"
-        android:text="@string/sq_start"
+        android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -129,7 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/sq_topic_item_enabled"
+        tools:listitem="@layout/topic_item_enabled"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

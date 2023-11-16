@@ -4,22 +4,4 @@
         <item name="android:textSize" >24sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
-
-
-    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
-        <item name="android:textSize" >22sp</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="SongQuizSettingsTextView" parent="@android:style/Widget.TextView" >
-        <item name="android:textSize" >24sp</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="SongQuizSettingsTopicCheckedBox" parent="@android:style/Widget.TextView" >
-        <item name="android:textSize" >24sp</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-
 </resources>

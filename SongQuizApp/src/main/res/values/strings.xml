@@ -1,0 +1,6 @@
+<resources>
+    <string name="topic_number">Количество тем: </string>
+    <string name="card_number">Количество карточек: </string>
+    <string name="chosen_topics">Выбрано %1$d из %2$d тем: </string>
+    <string name="start">Начать</string>
+</resources>

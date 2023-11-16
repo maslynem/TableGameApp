@@ -12,12 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@drawable/sq_check_box_enabled_background"
+        android:background="@drawable/check_box_enabled_background"
         android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/sq_cb_topic"
-            style="@style/SongQuizSettingsTopicCheckedBox"
+            style="@style/TopicCheckedBox"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

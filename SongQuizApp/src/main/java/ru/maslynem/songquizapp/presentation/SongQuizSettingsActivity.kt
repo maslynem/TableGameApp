@@ -1,16 +1,14 @@
-package ru.maslynem.presentation.songQuizSettingActivity
+package ru.maslynem.songquizapp.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.maslynem.mainactivity.R
-import ru.maslynem.mainactivity.databinding.ActivitySongQuizSettingsBinding
+import ru.maslynem.songquizapp.R
+import ru.maslynem.songquizapp.databinding.ActivitySongQuizSettingsBinding
 
 class SongQuizSettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongQuizSettingsBinding
@@ -82,7 +80,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          **/
         songQuizSettingsViewModel.topicNumber.observe(this) {
             val string = getString(
-                R.string.sq_chosen_topics,
+                R.string.chosen_topics,
                 songQuizSettingsViewModel.countOfSelectedTopics.value,
                 it
             )
@@ -95,7 +93,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          **/
         songQuizSettingsViewModel.countOfSelectedTopics.observe(this) {
             val string = getString(
-                R.string.sq_chosen_topics,
+                R.string.chosen_topics,
                 it,
                 songQuizSettingsViewModel.topicNumber.value
             )

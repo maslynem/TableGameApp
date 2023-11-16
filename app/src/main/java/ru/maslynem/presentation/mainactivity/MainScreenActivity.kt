@@ -2,11 +2,10 @@ package ru.maslynem.presentation.mainactivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.mainactivity.R
-import ru.maslynem.presentation.songQuizSettingActivity.SongQuizSettingsActivity
+import ru.maslynem.songquizapp.presentation.SongQuizSettingsActivity
 
 class MainScreenActivity : AppCompatActivity() {
     private lateinit var gameAdapter: GameListAdapter
