@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
+
+    <style name="ChoosePlayerDelItemBtn" parent="@style/Widget.AppCompat.Button.Borderless" >
+        <item name="android:textSize" >20sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+
+    <style name="ChoosePlayerTitle" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ChoosePlayerNameTextViewItem" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize" >20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SettingsSpinnerTextViewItem" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >22sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
@@ -10,12 +28,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
     <style name="SettingsTextViewDisc" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >14sp</item>
         <item name="android:textColor">@color/grey</item>
     </style>
 
-    <style name="TopicCheckedBox" parent="@android:style/Widget.TextView" >
+    <style name="SettingsTopicCheckedBox" parent="@android:style/Widget.TextView" >
         <item name="android:textSize" >22sp</item>
         <item name="android:textColor">@color/black</item>
     </style>

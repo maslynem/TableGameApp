@@ -7,7 +7,7 @@ import ru.maslynem.songquizapp.domain.GetTopicListUseCase
 import ru.maslynem.songquizapp.domain.topic.Topic
 import ru.maslynem.songquizapp.presentation.songQuizSettings.topic.TopicCheckBox
 
-class SongQuizSettingsViewModel : ViewModel() {
+class SettingsViewModel : ViewModel() {
 
     private val getTopicListUseCase = GetTopicListUseCase()
 

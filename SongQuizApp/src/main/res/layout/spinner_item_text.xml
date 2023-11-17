@@ -3,7 +3,7 @@
     android:id="@+id/textViewSpinnerItem"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    style="@style/SpinnerTextViewItem"
+    style="@style/SettingsSpinnerTextViewItem"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:text="2"
     />

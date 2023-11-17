@@ -1,5 +1,7 @@
 package ru.maslynem.songquizapp.presentation.songQuizSettings
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,9 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizSettingsBinding
 
-class SongQuizSettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongQuizSettingsBinding
-    private lateinit var songQuizSettingsViewModel: SongQuizSettingsViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var topicListAdapter: TopicListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +30,11 @@ class SongQuizSettingsActivity : AppCompatActivity() {
         createTopicSpinner()
         createCardSpinner()
 
-        songQuizSettingsViewModel = ViewModelProvider(this)[SongQuizSettingsViewModel::class.java]
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         addObserversToViewModel()
 
-        songQuizSettingsViewModel.getTopicList()
+        settingsViewModel.getTopicList()
     }
 
     private fun setupSeekBarTime() {
@@ -57,7 +59,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
         topicListAdapter = TopicListAdapter()
         binding.rvTopicList.adapter = topicListAdapter
         topicListAdapter.onTopicClick = { topic, isChecked ->
-            songQuizSettingsViewModel.onTopicItemClick(topic, isChecked)
+            settingsViewModel.onTopicItemClick(topic, isChecked)
         }
     }
 
@@ -66,7 +68,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
         topicSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val item: String = parent.getItemAtPosition(pos) as String
-                songQuizSettingsViewModel.onTopicSpinnerItemSelectedClick(item.toInt())
+                settingsViewModel.onTopicSpinnerItemSelectedClick(item.toInt())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -99,10 +101,10 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          * Слушатель topicNumber.
          * Когда пользователь в спиннере выбирает число, обновляется строка "Выбрано х из y тем"
          **/
-        songQuizSettingsViewModel.topicNumber.observe(this) {
+        settingsViewModel.topicNumber.observe(this) {
             val string = getString(
                 R.string.chosen_topics,
-                songQuizSettingsViewModel.countOfSelectedTopics.value,
+                settingsViewModel.countOfSelectedTopics.value,
                 it
             )
             binding.tvChosenTopics.text = string
@@ -112,11 +114,11 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          * Слушатель countOfChosenTopics.
          * Когда пользователь выбирает тему, обновляется строка "Выбрано х из y тем"
          **/
-        songQuizSettingsViewModel.countOfSelectedTopics.observe(this) {
+        settingsViewModel.countOfSelectedTopics.observe(this) {
             val string = getString(
                 R.string.chosen_topics,
                 it,
-                songQuizSettingsViewModel.topicNumber.value
+                settingsViewModel.topicNumber.value
             )
             binding.tvChosenTopics.text = string
         }
@@ -127,16 +129,25 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          * Такое происходит, когда пользователь выбирает тему. Состояние темы меняется в списке,
          * обновленный список передается в адаптер recycler view
          **/
-        songQuizSettingsViewModel.topicCheckBoxList.observe(this) {
+        settingsViewModel.topicCheckBoxList.observe(this) {
             topicListAdapter.topicCheckBoxList = it
         }
 
         /**
          * Пока пользователь не выбрал нужное кол-во тем, кнопка заблокирована
          **/
-        songQuizSettingsViewModel.shouldEnableStartBtn.observe(this) {
+        settingsViewModel.shouldEnableStartBtn.observe(this) {
             binding.btnStartGame.isEnabled = it
         }
     }
 
+    companion object {
+        private const val EXTRA_PLAYER_LIST = "extra_player_list"
+
+        fun newIntentWithPlayerList(context: Context, playerList: ArrayList<String>): Intent {
+            val intent = Intent(context, SettingsActivity::class.java)
+            intent.putExtra(EXTRA_PLAYER_LIST, playerList)
+            return intent
+        }
+    }
 }

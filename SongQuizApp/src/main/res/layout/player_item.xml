@@ -6,27 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
-    app:cardElevation="1dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@drawable/check_box_disabled_background"
+        android:background="@drawable/check_box_enabled_background"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/sq_cb_topic"
-            style="@style/SettingsTopicCheckedBox"
-            android:textColor="@color/grey"
+        <TextView
+            android:id="@+id/player_name"
+            style="@style/ChoosePlayerNameTextViewItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="ivan"
+            tools:ignore="RtlSymmetry" />
+
+        <Button
+            style="@style/ChoosePlayerDelItemBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:paddingStart="10dp"
-            tools:ignore="RtlSymmetry"
-            android:text="test"
+            android:text="@string/x"
             />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -3,11 +3,12 @@
 
     <application>
         <activity
-            android:name=".presentation.songQuizChoosePlayers.SongQuizChoosePlayer"
+            android:theme="@style/Theme.SongQuizTheme"
+            android:name=".presentation.songQuizChoosePlayers.ChoosePlayerActivity"
             android:exported="true" />
         <activity
             android:theme="@style/Theme.SongQuizTheme"
-            android:name=".presentation.songQuizSettings.SongQuizSettingsActivity"
+            android:name=".presentation.songQuizSettings.SettingsActivity"
             android:exported="true" />
     </application>
 

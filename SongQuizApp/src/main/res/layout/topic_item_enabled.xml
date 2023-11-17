@@ -17,7 +17,7 @@
 
         <CheckBox
             android:id="@+id/sq_cb_topic"
-            style="@style/TopicCheckedBox"
+            style="@style/SettingsTopicCheckedBox"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

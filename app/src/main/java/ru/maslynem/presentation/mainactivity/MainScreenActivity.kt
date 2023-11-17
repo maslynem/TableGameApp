@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.mainactivity.R
-import ru.maslynem.songquizapp.presentation.songQuizSettings.SongQuizSettingsActivity
+import ru.maslynem.songquizapp.presentation.songQuizChoosePlayers.ChoosePlayerActivity
 
 class MainScreenActivity : AppCompatActivity() {
     private lateinit var gameAdapter: GameListAdapter
@@ -24,7 +24,7 @@ class MainScreenActivity : AppCompatActivity() {
         rvGameName.adapter = gameAdapter
         gameAdapter.onGameClick = {
            if (it == "Звуковая викторина") {
-               val intent = Intent(this, SongQuizSettingsActivity::class.java)
+               val intent = Intent(this, ChoosePlayerActivity::class.java)
                startActivity(intent)
            }
         }

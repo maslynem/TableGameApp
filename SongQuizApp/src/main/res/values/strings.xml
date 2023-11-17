@@ -1,9 +1,15 @@
 <resources>
-    <string name="topic_number">Количество категорий: </string>
-    <string name="card_number">Количество слов: </string>
-    <string name="card_number_disc">в одной категории </string>
-    <string name="time">Время: </string>
-    <string name="time_disc">продолжительность в секундах </string>
-    <string name="chosen_topics">Выбрано %1$d из %2$d категорий: </string>
+    <string name="players">Игроки:</string>
+    <string name="add">Добавить</string>
+    <string name="cansel">Отменить</string>
+    <string name="next">Далее</string>
+    <string name="name">Имя</string>
+    <string name="topic_number">Количество категорий:</string>
+    <string name="card_number">Количество слов:</string>
+    <string name="card_number_disc">в одной категории</string>
+    <string name="time">Время:</string>
+    <string name="time_disc">продолжительность в секундах</string>
+    <string name="chosen_topics">Выбрано %1$d из %2$d категорий:</string>
     <string name="start">Начать</string>
+    <string name="x">X</string>
 </resources>
