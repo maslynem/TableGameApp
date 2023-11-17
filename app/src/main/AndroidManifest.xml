@@ -10,12 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MainActivity"
         tools:targetApi="31">
         <activity
-            android:name="ru.maslynem.songquizapp.presentation.SongQuizSettingsActivity"
-            android:exported="false" />
-        <activity
+            android:theme="@style/Theme.MainActivity"
             android:name="ru.maslynem.presentation.mainactivity.MainScreenActivity"
             android:exported="true">
             <intent-filter>

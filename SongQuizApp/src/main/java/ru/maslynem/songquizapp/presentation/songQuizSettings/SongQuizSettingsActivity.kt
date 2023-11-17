@@ -1,9 +1,10 @@
-package ru.maslynem.songquizapp.presentation
+package ru.maslynem.songquizapp.presentation.songQuizSettings
 
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SeekBar
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,8 @@ class SongQuizSettingsActivity : AppCompatActivity() {
         binding = ActivitySongQuizSettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupSeekBarTime()
+
         setupRecyclerView()
 
         createTopicSpinner()
@@ -32,16 +35,34 @@ class SongQuizSettingsActivity : AppCompatActivity() {
         songQuizSettingsViewModel.getTopicList()
     }
 
+    private fun setupSeekBarTime() {
+        binding.tvTimeValue.text = binding.sbTime.progress.toString()
+        binding.sbTime.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val newProgress = progress / 10 * 10
+                seekBar?.progress = newProgress
+                binding.tvTimeValue.text = newProgress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+    }
+
     private fun setupRecyclerView() {
         topicListAdapter = TopicListAdapter()
-        binding.sqRvTopicList.adapter = topicListAdapter
+        binding.rvTopicList.adapter = topicListAdapter
         topicListAdapter.onTopicClick = { topic, isChecked ->
             songQuizSettingsViewModel.onTopicItemClick(topic, isChecked)
         }
     }
 
     private fun createTopicSpinner() {
-        val topicSpinner: Spinner = binding.sqSpTopicNumber
+        val topicSpinner: Spinner = binding.spTopicNumber
         topicSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 val item: String = parent.getItemAtPosition(pos) as String
@@ -62,7 +83,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
     }
 
     private fun createCardSpinner() {
-        val cardSpinner: Spinner = binding.sqSpCardNumber
+        val cardSpinner: Spinner = binding.spCardNumber
         ArrayAdapter.createFromResource(
             this,
             R.array.card_number_array,
@@ -84,7 +105,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
                 songQuizSettingsViewModel.countOfSelectedTopics.value,
                 it
             )
-            binding.sqTvChosenTopics.text = string
+            binding.tvChosenTopics.text = string
         }
 
         /**
@@ -97,7 +118,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
                 it,
                 songQuizSettingsViewModel.topicNumber.value
             )
-            binding.sqTvChosenTopics.text = string
+            binding.tvChosenTopics.text = string
         }
 
         /**
@@ -114,7 +135,7 @@ class SongQuizSettingsActivity : AppCompatActivity() {
          * Пока пользователь не выбрал нужное кол-во тем, кнопка заблокирована
          **/
         songQuizSettingsViewModel.shouldEnableStartBtn.observe(this) {
-            binding.sqBtnStartGame.isEnabled = it
+            binding.btnStartGame.isEnabled = it
         }
     }
 

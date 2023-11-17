@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation
+package ru.maslynem.songquizapp.presentation.songQuizSettings
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.CheckBox
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.presentation.topic.TopicCheckBox
+import ru.maslynem.songquizapp.presentation.songQuizSettings.topic.TopicCheckBox
 
 class TopicListAdapter :
     RecyclerView.Adapter<TopicListAdapter.TopicViewHolder>() {

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/song_quiz_app_background"
-    tools:context="ru.maslynem.songquizapp.presentation.SongQuizSettingsActivity">
+    tools:context="ru.maslynem.songquizapp.presentation.songQuizSettings.SongQuizSettingsActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ll_topic_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,8 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
-            android:id="@+id/sq_tv_topic_number"
+            android:id="@+id/tv_topic_number"
             style="@style/SettingsTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,7 +33,7 @@
             tools:ignore="RtlSymmetry" />
 
         <Spinner
-            android:id="@+id/sq_sp_topic_number"
+            android:id="@+id/sp_topic_number"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,8 +45,17 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        app:layout_constraintBottom_toTopOf="@+id/ll_card_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_topic_number" />
+
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/ll_card_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,21 +66,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/ll_topic_number">
 
-        <TextView
-            android:id="@+id/sq_tv_card_number"
-            style="@style/SettingsTextView"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:paddingStart="10dp"
-            android:text="@string/card_number"
-            tools:ignore="RtlSymmetry" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_card_number"
+                style="@style/SettingsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="@string/card_number"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/tv_card_number_disc"
+                style="@style/SettingsTextViewDisc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:text="@string/card_number_disc"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
 
         <Spinner
-            android:id="@+id/sq_sp_card_number"
+            android:id="@+id/sp_card_number"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -82,8 +108,97 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        app:layout_constraintBottom_toTopOf="@+id/ll_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_card_number" />
+
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/ll_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/ll_chosen_topics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_card_number">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_time_text"
+                    style="@style/SettingsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:text="@string/time"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/tv_time_text_disc"
+                    style="@style/SettingsTextViewDisc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="@string/time_disc"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_time_value"
+                style="@style/SettingsTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sb_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <SeekBar
+                android:id="@+id/sb_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="180"
+                android:min="30"
+                android:progress="60"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        app:layout_constraintBottom_toTopOf="@+id/ll_chosen_topics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_time" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_chosen_topics"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -94,10 +209,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/ll_time">
 
         <TextView
-            android:id="@+id/sq_tv_chosen_topics"
+            android:id="@+id/tv_chosen_topics"
             style="@style/SettingsTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -106,8 +221,23 @@
             android:text="@string/chosen_topics" />
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_topic_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/btn_startGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_chosen_topics"
+        tools:listitem="@layout/topic_item_enabled" />
+
     <Button
-        android:id="@+id/sq_btn_startGame"
+        android:id="@+id/btn_startGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -116,21 +246,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sq_rv_topic_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/sq_btn_startGame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/topic_item_enabled"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
