@@ -1,6 +1,7 @@
 <resources>
     <string name="players">Игроки:</string>
     <string name="add">Добавить</string>
+    <string name="edit">Изменить</string>
     <string name="cansel">Отменить</string>
     <string name="next">Далее</string>
     <string name="name">Имя</string>
@@ -12,4 +13,7 @@
     <string name="chosen_topics">Выбрано %1$d из %2$d категорий:</string>
     <string name="start">Начать</string>
     <string name="x">X</string>
+    <string name="player_one">Игрок 1</string>
+    <string name="player_two">Игрок 2</string>
+    <string name="error_input_name">Имя не может быть пустым</string>
 </resources>

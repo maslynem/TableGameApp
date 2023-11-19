@@ -3,7 +3,7 @@ package ru.maslynem.songquizapp.presentation.songQuizSettings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.songquizapp.domain.GetTopicListUseCase
+import ru.maslynem.songquizapp.domain.topic.GetTopicListUseCase
 import ru.maslynem.songquizapp.domain.topic.Topic
 import ru.maslynem.songquizapp.presentation.songQuizSettings.topic.TopicCheckBox
 

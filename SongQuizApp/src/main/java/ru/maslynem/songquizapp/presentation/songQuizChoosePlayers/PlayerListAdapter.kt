@@ -1,40 +1,46 @@
 package ru.maslynem.songquizapp.presentation.songQuizChoosePlayers
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
+import ru.maslynem.songquizapp.domain.player.Player
 
 
-class PlayerListAdapter(context: Context) : BaseAdapter() {
+class PlayerListAdapter :
+   ListAdapter<Player, PlayerListAdapter.PlayerItemViewHolder>(PlayerDiffCallback()) {
 
-    private val inflater = LayoutInflater.from(context)
-    var playerList = listOf<String>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    var onDeleteClick: ((player: Player) -> Unit)? = null
 
-    override fun getCount(): Int {
-        return playerList.size
+    var onPlayerClick: ((player: Player) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerItemViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.player_item,
+            parent,
+            false
+        )
+        return PlayerItemViewHolder(view)
     }
 
-    override fun getItem(position: Int): Any {
-        return playerList[position]
+    override fun onBindViewHolder(holder: PlayerItemViewHolder, position: Int) {
+        val player = getItem(position)
+        holder.playerUserName.text = player.playerName
+        holder.delBtn.setOnClickListener { onDeleteClick?.invoke(player) }
+        holder.playerUserName.setOnClickListener { onPlayerClick?.invoke(player) }
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+    override fun onViewRecycled(holder: PlayerItemViewHolder) {
+        super.onViewRecycled(holder)
+        holder.playerUserName.text = ""
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = inflater.inflate(R.layout.player_item, null)
-        val userNameTextView = view.findViewById<TextView>(R.id.player_name)
-        userNameTextView.text = playerList[position]
-        return view
+    class PlayerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val playerUserName: TextView = view.findViewById(R.id.tv_player_name)
+        val delBtn: Button = view.findViewById(R.id.btn_del_player)
     }
-
 }

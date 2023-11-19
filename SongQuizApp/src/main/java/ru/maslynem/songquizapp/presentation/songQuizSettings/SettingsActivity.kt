@@ -142,12 +142,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val EXTRA_PLAYER_LIST = "extra_player_list"
-
-        fun newIntentWithPlayerList(context: Context, playerList: ArrayList<String>): Intent {
-            val intent = Intent(context, SettingsActivity::class.java)
-            intent.putExtra(EXTRA_PLAYER_LIST, playerList)
-            return intent
+        fun newIntentWithPlayerList(context: Context): Intent {
+            return Intent(context, SettingsActivity::class.java)
         }
     }
 }

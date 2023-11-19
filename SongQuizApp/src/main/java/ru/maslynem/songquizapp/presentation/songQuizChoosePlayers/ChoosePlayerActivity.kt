@@ -1,32 +1,87 @@
 package ru.maslynem.songquizapp.presentation.songQuizChoosePlayers
 
 import android.os.Bundle
-import android.view.View.MeasureSpec
-import android.widget.ArrayAdapter
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizChoosePlayerBinding
+import ru.maslynem.songquizapp.domain.player.Player
 import ru.maslynem.songquizapp.presentation.songQuizSettings.SettingsActivity
 
 
-class ChoosePlayerActivity : AppCompatActivity(), AddPlayerDialogFragment.NoticeDialogListener {
+class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDialogListener {
     private lateinit var binding: ActivitySongQuizChoosePlayerBinding
-    private lateinit var listViewAdapter: PlayerListAdapter
-    private val players = arrayListOf<String>()
+    private lateinit var playerListAdapter: PlayerListAdapter
+    private lateinit var choosePlayerViewModel: ChoosePlayerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongQuizChoosePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        choosePlayerViewModel = ViewModelProvider(this)[ChoosePlayerViewModel::class.java]
 
-        setupPlayerListView()
+
+        setupRecyclerView()
         setupAddButtonClickListener()
         setupNextButtonClick()
+
+        addObserversToViewModel()
+
+        if (choosePlayerViewModel.playerList.value?.isEmpty() == true) {
+            choosePlayerViewModel.addPlayer(getString(R.string.player_one))
+            choosePlayerViewModel.addPlayer(getString(R.string.player_two))
+        }
+
     }
 
-    private fun setupPlayerListView() {
-        listViewAdapter = PlayerListAdapter(this)
-        binding.llPlayers.adapter = listViewAdapter
+    private fun setupRecyclerView() {
+        playerListAdapter = PlayerListAdapter()
+        binding.rvPlayerList.adapter = playerListAdapter
+        playerListAdapter.onDeleteClick = {
+            choosePlayerViewModel.delPlayer(it)
+        }
+        playerListAdapter.onPlayerClick = {
+            showEditPlayerDialogFragment(it)
+        }
+
+        val callback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val player = playerListAdapter.currentList[viewHolder.adapterPosition]
+                choosePlayerViewModel.delPlayer(player)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.rvPlayerList)
+    }
+
+    private fun addObserversToViewModel() {
+        choosePlayerViewModel.playerList.observe(this) {
+            Log.d("activity", "$it")
+            playerListAdapter.submitList(it)
+        }
+
+        choosePlayerViewModel.shouldDisableAddBtn.observe(this) {
+            binding.btnAdd.isEnabled = !it
+        }
+
+        choosePlayerViewModel.shouldEnableNextBtn.observe(this) {
+            binding.btnNext.isEnabled = it
+        }
     }
 
     private fun setupAddButtonClickListener() {
@@ -38,39 +93,37 @@ class ChoosePlayerActivity : AppCompatActivity(), AddPlayerDialogFragment.Notice
     private fun setupNextButtonClick() {
         binding.btnNext.isEnabled = false
         binding.btnNext.setOnClickListener {
-            val intent = SettingsActivity.newIntentWithPlayerList(this, players)
-            startActivity(intent)
+            val playerList = choosePlayerViewModel.playerList.value
+            playerList?.let {
+                val intent = SettingsActivity.newIntentWithPlayerList(this)
+                startActivity(intent)
+            }
         }
     }
 
     private fun showAddPlayerDialogFragment() {
-        val dialog = AddPlayerDialogFragment()
+        val dialog = PlayerDialogFragment.newInstanceAddPlayer()
         dialog.show(supportFragmentManager, "addPlayerDialogFragment")
     }
+    private fun showEditPlayerDialogFragment(player: Player) {
+        val dialog = PlayerDialogFragment.newInstanceEditPlayer(player)
+        dialog.show(supportFragmentManager, "editPlayerDialogFragment")
+    }
 
-    override fun onDialogPositiveClick(dialogFragment: DialogFragment, name: String) {
+    override fun onDialogAddModePositiveClick(dialogFragment: DialogFragment, name: String) {
         if (name.isNotBlank()) {
-            players.add(name)
-            listViewAdapter.playerList = players
-            updateListViewHeightBasedOnChildren()
+            choosePlayerViewModel.addPlayer(name)
         }
     }
 
-    private fun updateListViewHeightBasedOnChildren() {
-        val listView = binding.llPlayers
-        val listAdapter = binding.llPlayers.adapter
-        var totalHeight = 0
-        val desiredWidth = MeasureSpec.makeMeasureSpec(listView.width, MeasureSpec.AT_MOST)
-        for (i in 0 until listAdapter.count) {
-            val listItem = listAdapter.getView(i, null, listView)
-            listItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED)
-            totalHeight += listItem.measuredHeight
+    override fun onDialogEditModePositiveClick(
+        dialogFragment: DialogFragment,
+        name: String,
+        playerId: Int
+    ) {
+        if (name.isNotBlank()) {
+            choosePlayerViewModel.editPlayer(name, playerId)
         }
-
-        val params = listView.layoutParams
-        params.height = totalHeight + listView.dividerHeight * (listAdapter.count - 1)
-        listView.layoutParams = params
-        listView.requestLayout()
-
     }
+
 }
