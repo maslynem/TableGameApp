@@ -22,7 +22,11 @@ val appModule = module {
     }
 
     viewModel<GameViewModel> {
-        GameViewModel()
+        GameViewModel(
+            getPlayerListUseCase = get(),
+            getTopicWithCardNumberUseCase = get(),
+            removeCardUseCase = get()
+        )
     }
 }
 

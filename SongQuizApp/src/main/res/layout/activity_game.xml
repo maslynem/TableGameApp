@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.game.GameActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_score"
+        style="@style/GameScoreTextView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="HELLO WORLD"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="337dp" />
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/score"
+        app:layout_constraintBottom_toTopOf="@id/rv_player_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_player_score"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:cacheColorHint="@android:color/transparent"
+
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/rv_topic_with_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_score"
+        app:spanCount="2"
+        tools:listitem="@layout/player_score_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_topic_with_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_player_score"
+        tools:listitem="@layout/game_topic_with_card_item_enabled" />
 </androidx.constraintlayout.widget.ConstraintLayout>

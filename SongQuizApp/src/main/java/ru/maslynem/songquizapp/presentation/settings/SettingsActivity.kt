@@ -37,7 +37,11 @@ class SettingsActivity : AppCompatActivity() {
         binding.btnStartGame.setOnClickListener {
             val intent = GameActivity.newIntent(
                 this,
-                ArrayList(settingsViewModel.topicCheckBoxList.value!!.map(TopicCheckBox::name)),
+                ArrayList(
+                    settingsViewModel.topicCheckBoxList.value!!
+                        .filter(TopicCheckBox::selected)
+                        .map(TopicCheckBox::name)
+                ),
                 settingsViewModel.cardNumber.value!!
             )
             startActivity(intent)

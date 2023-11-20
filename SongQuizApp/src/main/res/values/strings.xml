@@ -20,4 +20,5 @@
     <string name="back_pressed_message">Вы хотите выйти? Весь прогресс будет сброшен</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="score">Счет</string>
 </resources>

@@ -8,6 +8,8 @@ import org.koin.core.logger.Level
 import ru.maslynem.songquizapp.di.appModule
 import ru.maslynem.songquizapp.di.choosePlayer.choosePlayerDataModule
 import ru.maslynem.songquizapp.di.choosePlayer.choosePlayerDomainModule
+import ru.maslynem.songquizapp.di.game.gameDataModule
+import ru.maslynem.songquizapp.di.game.gameDomainModule
 import ru.maslynem.songquizapp.di.settings.settingsDataModule
 import ru.maslynem.songquizapp.di.settings.settingsDomainModule
 
@@ -24,7 +26,9 @@ class App : Application() {
                     choosePlayerDataModule,
                     choosePlayerDomainModule,
                     settingsDataModule,
-                    settingsDomainModule
+                    settingsDomainModule,
+                    gameDataModule,
+                    gameDomainModule
                 )
             )
         }

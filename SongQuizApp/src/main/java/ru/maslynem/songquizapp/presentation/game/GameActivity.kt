@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -14,6 +13,8 @@ import ru.maslynem.songquizapp.databinding.ActivityGameBinding
 
 class GameActivity : AppCompatActivity() {
     private val gameViewModel by viewModel<GameViewModel>()
+    private lateinit var topicWithCardNumberListAdapter: TopicWithCardNumberListAdapter
+    private lateinit var playerScoreListAdapter: PlayerScoreListAdapter
     private lateinit var binding: ActivityGameBinding
 
 
@@ -21,13 +22,32 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         validateIntent()
         if (savedInstanceState == null) {
-            Log.d("GameActivity", "!!!!!!!!!!!!!!")
             initializeViewModel()
         }
+        setupRecyclerView()
+        addObserversToViewModel()
         setupOnBackPressed()
+    }
+
+    private fun addObserversToViewModel() {
+        gameViewModel.topicWithCardNumberList.observe(this) {
+            topicWithCardNumberListAdapter.submitList(it)
+        }
+
+        gameViewModel.playerList.observe(this) {
+            playerScoreListAdapter.playerList = it
+        }
+    }
+
+    private fun setupRecyclerView() {
+        topicWithCardNumberListAdapter = TopicWithCardNumberListAdapter()
+        binding.rvTopicWithCard?.adapter = topicWithCardNumberListAdapter
+
+        playerScoreListAdapter = PlayerScoreListAdapter()
+        binding.rvPlayerScore?.adapter = playerScoreListAdapter
+
     }
 
     private fun setupOnBackPressed() {

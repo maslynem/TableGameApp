@@ -29,14 +29,32 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="SettingsTextViewDisc" parent="@android:style/Widget.TextView" >
-        <item name="android:textSize" >14sp</item>
+    <style name="SettingsTextViewDisc" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey</item>
     </style>
 
-    <style name="SettingsTopicCheckedBox" parent="@android:style/Widget.TextView" >
-        <item name="android:textSize" >22sp</item>
+    <style name="SettingsTopicCheckedBox" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="GameTopicTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="GameTopicNumberTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">55sp</item>
+        <item name="android:textColor">@color/transparent_grey</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="GameScoreTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 </resources>
