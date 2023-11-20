@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.songQuizSettings
+package ru.maslynem.songquizapp.presentation.settings
 
 import android.content.Context
 import android.content.Intent
@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizSettingsBinding
+import ru.maslynem.songquizapp.presentation.game.GameActivity
+import ru.maslynem.songquizapp.presentation.settings.topic.TopicCheckBox
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySongQuizSettingsBinding
     private lateinit var topicListAdapter: TopicListAdapter
+    private lateinit var binding: ActivitySongQuizSettingsBinding
     private val settingsViewModel by viewModel<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,15 @@ class SettingsActivity : AppCompatActivity() {
         createCardSpinner()
 
         addObserversToViewModel()
+
+        binding.btnStartGame.setOnClickListener {
+            val intent = GameActivity.newIntent(
+                this,
+                ArrayList(settingsViewModel.topicCheckBoxList.value!!.map(TopicCheckBox::name)),
+                settingsViewModel.cardNumber.value!!
+            )
+            startActivity(intent)
+        }
 
         settingsViewModel.getTopicList()
     }
@@ -84,6 +95,15 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun createCardSpinner() {
         val cardSpinner: Spinner = binding.spCardNumber
+        cardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                val item: String = parent.getItemAtPosition(pos) as String
+                settingsViewModel.onCardNumberSpinnerItemSelectedClick(item.toInt())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+
+        }
         ArrayAdapter.createFromResource(
             this,
             R.array.card_number_array,
@@ -140,7 +160,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntentWithPlayerList(context: Context): Intent {
+        fun newIntent(context: Context): Intent {
             return Intent(context, SettingsActivity::class.java)
         }
     }

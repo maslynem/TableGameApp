@@ -1,11 +1,11 @@
-package ru.maslynem.songquizapp.presentation.songQuizSettings
+package ru.maslynem.songquizapp.presentation.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.maslynem.songquizapp.domain.topic.GetTopicListUseCase
 import ru.maslynem.songquizapp.domain.topic.Topic
-import ru.maslynem.songquizapp.presentation.songQuizSettings.topic.TopicCheckBox
+import ru.maslynem.songquizapp.presentation.settings.topic.TopicCheckBox
 
 class SettingsViewModel(private val getTopicListUseCase: GetTopicListUseCase) : ViewModel() {
 
@@ -86,6 +86,10 @@ class SettingsViewModel(private val getTopicListUseCase: GetTopicListUseCase) : 
         _topicNumber.value = value
         _shouldEnableStartBtn.value = _countOfSelectedTopics.value!! == _topicNumber.value!!
         checkEnableStateOfTopicList()
+    }
+
+    fun onCardNumberSpinnerItemSelectedClick(value: Int) {
+        _cardNumber.value = value
     }
 
 

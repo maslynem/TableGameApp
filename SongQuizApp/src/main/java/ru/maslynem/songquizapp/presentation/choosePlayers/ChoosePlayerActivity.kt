@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.songQuizChoosePlayers
+package ru.maslynem.songquizapp.presentation.choosePlayers
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizChoosePlayerBinding
 import ru.maslynem.songquizapp.domain.player.Player
-import ru.maslynem.songquizapp.presentation.songQuizSettings.SettingsActivity
+import ru.maslynem.songquizapp.presentation.settings.SettingsActivity
 
 
 class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDialogListener {
@@ -94,7 +94,7 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
         binding.btnNext.setOnClickListener {
             val playerList = choosePlayerViewModel.playerList.value
             playerList?.let {
-                val intent = SettingsActivity.newIntentWithPlayerList(this)
+                val intent = SettingsActivity.newIntent(this)
                 startActivity(intent)
             }
         }

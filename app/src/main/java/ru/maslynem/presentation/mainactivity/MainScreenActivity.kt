@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.mainactivity.R
-import ru.maslynem.songquizapp.presentation.songQuizChoosePlayers.ChoosePlayerActivity
+import ru.maslynem.songquizapp.presentation.choosePlayers.ChoosePlayerActivity
 
 class MainScreenActivity : AppCompatActivity() {
     private lateinit var gameAdapter: GameListAdapter

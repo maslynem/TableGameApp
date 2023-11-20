@@ -1,7 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Base.Theme.MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
 
     <style name="Theme.MainActivity" parent="Base.Theme.MainActivity">
+        <item name="android:windowBackground">@drawable/app_background</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.songQuizChoosePlayers
+package ru.maslynem.songquizapp.presentation.choosePlayers
 
 import android.view.LayoutInflater
 import android.view.View

@@ -16,4 +16,8 @@
     <string name="player_one">Игрок 1</string>
     <string name="player_two">Игрок 2</string>
     <string name="error_input_name">Имя не может быть пустым</string>
+    <string name="back_pressed_title">Выход</string>
+    <string name="back_pressed_message">Вы хотите выйти? Весь прогресс будет сброшен</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
