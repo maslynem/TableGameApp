@@ -9,14 +9,14 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizSettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongQuizSettingsBinding
-    private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var topicListAdapter: TopicListAdapter
+    private val settingsViewModel by viewModel<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +29,6 @@ class SettingsActivity : AppCompatActivity() {
 
         createTopicSpinner()
         createCardSpinner()
-
-        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         addObserversToViewModel()
 

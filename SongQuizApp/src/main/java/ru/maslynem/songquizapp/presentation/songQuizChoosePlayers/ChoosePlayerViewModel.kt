@@ -3,22 +3,18 @@ package ru.maslynem.songquizapp.presentation.songQuizChoosePlayers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.songquizapp.data.PlayerListRepositoryImpl
 import ru.maslynem.songquizapp.domain.player.AddPlayerUseCase
 import ru.maslynem.songquizapp.domain.player.DeletePlayerUseCase
 import ru.maslynem.songquizapp.domain.player.EditPlayerUseCase
 import ru.maslynem.songquizapp.domain.player.GetPlayerListUseCase
 import ru.maslynem.songquizapp.domain.player.Player
 
-class ChoosePlayerViewModel : ViewModel() {
-
-    private val repository = PlayerListRepositoryImpl()
-
-    private val addPlayerUseCase = AddPlayerUseCase(repository)
-    private val deletePlayerUseCase = DeletePlayerUseCase(repository)
-    private val editPlayerUseCase = EditPlayerUseCase(repository)
-    private val getPlayerListUseCase = GetPlayerListUseCase(repository)
-
+class ChoosePlayerViewModel(
+    private val addPlayerUseCase: AddPlayerUseCase,
+    private val deletePlayerUseCase: DeletePlayerUseCase,
+    private val editPlayerUseCase: EditPlayerUseCase,
+    private val getPlayerListUseCase: GetPlayerListUseCase
+) : ViewModel() {
 
     private var _shouldEnableNextBtn = MutableLiveData<Boolean>()
     val shouldEnableNextBtn: LiveData<Boolean>
@@ -36,12 +32,12 @@ class ChoosePlayerViewModel : ViewModel() {
     }
 
     fun addPlayer(name: String) {
-       addPlayerUseCase.addPlayer(Player(playerName = name))
+        addPlayerUseCase.addPlayer(Player(playerName = name))
         checkSizeOfList()
     }
 
     fun editPlayer(name: String, playerId: Int) {
-       editPlayerUseCase.editPlayer(Player(id = playerId, playerName = name))
+        editPlayerUseCase.editPlayer(Player(id = playerId, playerName = name))
     }
 
     private fun checkSizeOfList() {

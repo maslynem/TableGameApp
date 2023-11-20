@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizChoosePlayerBinding
 import ru.maslynem.songquizapp.domain.player.Player
@@ -14,15 +14,15 @@ import ru.maslynem.songquizapp.presentation.songQuizSettings.SettingsActivity
 
 
 class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDialogListener {
+
     private lateinit var binding: ActivitySongQuizChoosePlayerBinding
     private lateinit var playerListAdapter: PlayerListAdapter
-    private lateinit var choosePlayerViewModel: ChoosePlayerViewModel
+    private val choosePlayerViewModel by viewModel<ChoosePlayerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongQuizChoosePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        choosePlayerViewModel = ViewModelProvider(this)[ChoosePlayerViewModel::class.java]
 
 
         setupRecyclerView()
@@ -35,7 +35,6 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
             choosePlayerViewModel.addPlayer(getString(R.string.player_one))
             choosePlayerViewModel.addPlayer(getString(R.string.player_two))
         }
-
     }
 
     private fun setupRecyclerView() {
@@ -125,5 +124,4 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
             choosePlayerViewModel.editPlayer(name, playerId)
         }
     }
-
 }

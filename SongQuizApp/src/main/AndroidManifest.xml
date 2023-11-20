@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application>
+    <application android:name=".app.App">
         <activity
             android:theme="@style/Theme.SongQuizTheme"
             android:name=".presentation.songQuizChoosePlayers.ChoosePlayerActivity"

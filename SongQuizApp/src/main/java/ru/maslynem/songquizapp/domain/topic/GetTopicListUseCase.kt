@@ -1,26 +1,11 @@
 package ru.maslynem.songquizapp.domain.topic
 
-class GetTopicListUseCase {
+import androidx.lifecycle.LiveData
 
-    private var topicList = mutableListOf<Topic>()
+class GetTopicListUseCase(private val topicListRepository: TopicListRepository) {
 
-    init {
-        topicList.apply {
-            add(Topic("Природа"))
-            add(Topic("Профессии"))
-            add(Topic("Транспорт"))
-            add(Topic("Спорт"))
-            add(Topic("Кинофильмы"))
-            add(Topic("Аниме"))
-            add(Topic("Аниме1"))
-            add(Topic("Аниме2"))
-            add(Topic("Аниме3"))
-            add(Topic("Аниме4"))
-            add(Topic("Аниме5"))
-        }
-    }
 
-    fun getTopicList(): List<Topic> {
-        return topicList
+    fun getTopicList(): LiveData<List<Topic>> {
+        return topicListRepository.getTopicList()
     }
 }

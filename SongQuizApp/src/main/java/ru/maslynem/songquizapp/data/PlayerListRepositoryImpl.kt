@@ -13,6 +13,7 @@ class PlayerListRepositoryImpl : PlayerListRepository {
     init {
         updateList()
     }
+
     override fun getPlayerList(): LiveData<List<Player>> {
         return playerListLD
     }
