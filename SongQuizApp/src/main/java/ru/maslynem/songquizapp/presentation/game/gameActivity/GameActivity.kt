@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.game
+package ru.maslynem.songquizapp.presentation.game.gameActivity
 
 import android.app.AlertDialog
 import android.content.Context
@@ -44,6 +44,9 @@ class GameActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         topicWithCardNumberListAdapter = TopicWithCardNumberListAdapter()
         binding.rvTopicWithCard?.adapter = topicWithCardNumberListAdapter
+        topicWithCardNumberListAdapter.onTopicClick = {
+
+        }
 
         playerScoreListAdapter = PlayerScoreListAdapter()
         binding.rvPlayerScore?.adapter = playerScoreListAdapter
@@ -70,6 +73,9 @@ class GameActivity : AppCompatActivity() {
         if (!intent.hasExtra(EXTRA_TOPIC_LIST)) {
             throw RuntimeException("Param topic list is absent")
         }
+        if (!intent.hasExtra(EXTRA_TIME)) {
+            throw RuntimeException("Param time is absent")
+        }
     }
 
     private fun initializeViewModel() {
@@ -81,12 +87,19 @@ class GameActivity : AppCompatActivity() {
     companion object {
         private const val EXTRA_TOPIC_LIST = "extra_topic_list"
         private const val EXTRA_CARD_NUMBER = "extra_card_number"
+        private const val EXTRA_TIME = "extra_time"
         const val UNDEFINED_CARD_NUMBER = -1
 
-        fun newIntent(context: Context, topicList: ArrayList<String>, cardNumber: Int): Intent {
+        fun newIntent(
+            context: Context,
+            topicList: ArrayList<String>,
+            cardNumber: Int,
+            time: Int
+        ): Intent {
             val intent = Intent(context, GameActivity::class.java)
             intent.putExtra(EXTRA_CARD_NUMBER, cardNumber)
             intent.putExtra(EXTRA_TOPIC_LIST, topicList)
+            intent.putExtra(EXTRA_TIME, time)
             return intent
         }
     }

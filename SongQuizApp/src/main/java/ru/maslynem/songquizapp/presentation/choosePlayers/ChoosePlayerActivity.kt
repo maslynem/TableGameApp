@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizChoosePlayerBinding
-import ru.maslynem.songquizapp.domain.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.Player
 import ru.maslynem.songquizapp.presentation.settings.SettingsActivity
 
 
@@ -90,7 +90,6 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
     }
 
     private fun setupNextButtonClick() {
-        binding.btnNext.isEnabled = false
         binding.btnNext.setOnClickListener {
             val playerList = choosePlayerViewModel.playerList.value
             playerList?.let {

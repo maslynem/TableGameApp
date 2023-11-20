@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.domain.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.PlayerDiffCallback
 
 
 class PlayerListAdapter :

@@ -1,13 +1,13 @@
-package ru.maslynem.songquizapp.presentation.game
+package ru.maslynem.songquizapp.presentation.game.gameActivity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.songquizapp.domain.game.Card
-import ru.maslynem.songquizapp.domain.game.GetTopicWithCardNumberUseCase
-import ru.maslynem.songquizapp.domain.game.RemoveCardUseCase
-import ru.maslynem.songquizapp.domain.player.GetPlayerListUseCase
-import ru.maslynem.songquizapp.domain.player.Player
-import ru.maslynem.songquizapp.domain.topic.Topic
+import ru.maslynem.songquizapp.domain.cardUseCase.GetTopicWithCardNumberUseCase
+import ru.maslynem.songquizapp.domain.cardUseCase.RemoveCardUseCase
+import ru.maslynem.songquizapp.domain.entity.game.Card
+import ru.maslynem.songquizapp.domain.entity.player.Player
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
+import ru.maslynem.songquizapp.domain.playerUseCase.GetPlayerListUseCase
 
 class GameViewModel(
     private val getPlayerListUseCase: GetPlayerListUseCase,

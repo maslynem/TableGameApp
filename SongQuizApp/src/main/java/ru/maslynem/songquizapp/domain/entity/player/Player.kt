@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.domain.player
+package ru.maslynem.songquizapp.domain.entity.player
 
 data class Player(
     var id: Int = UNDEFINED_ID,

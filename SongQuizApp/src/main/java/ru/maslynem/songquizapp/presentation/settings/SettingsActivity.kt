@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivitySongQuizSettingsBinding
-import ru.maslynem.songquizapp.presentation.game.GameActivity
-import ru.maslynem.songquizapp.presentation.settings.topic.TopicCheckBox
+import ru.maslynem.songquizapp.presentation.game.gameActivity.GameActivity
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var topicListAdapter: TopicListAdapter
@@ -42,7 +41,8 @@ class SettingsActivity : AppCompatActivity() {
                         .filter(TopicCheckBox::selected)
                         .map(TopicCheckBox::name)
                 ),
-                settingsViewModel.cardNumber.value!!
+                settingsViewModel.cardNumber.value!!,
+                Integer.parseInt(binding.tvTimeValue.text.toString())
             )
             startActivity(intent)
         }

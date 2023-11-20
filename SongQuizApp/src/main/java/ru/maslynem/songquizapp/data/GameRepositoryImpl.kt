@@ -2,9 +2,9 @@ package ru.maslynem.songquizapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.maslynem.songquizapp.domain.game.Card
-import ru.maslynem.songquizapp.domain.game.GameRepository
-import ru.maslynem.songquizapp.domain.topic.Topic
+import ru.maslynem.songquizapp.domain.cardUseCase.GameRepository
+import ru.maslynem.songquizapp.domain.entity.game.Card
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
 
 
 class GameRepositoryImpl : GameRepository {
@@ -39,6 +39,11 @@ class GameRepositoryImpl : GameRepository {
         cardMap[card.topic]!!.remove(card)
         cardMap.keys.find { it == card.topic }!!.cardNumber.dec()
         updateCardMap()
+    }
+
+    override fun getCardByTopic(topic: Topic): Card {
+        val cards = cardMap[topic]!!
+        return cards[0]
     }
 
     private fun updateCardMap() {

@@ -5,7 +5,10 @@
         android:name=".app.App"
         android:theme="@style/Theme.SongQuizTheme">
         <activity
-            android:name=".presentation.game.GameActivity"
+            android:name=".presentation.game.cardActivity.CardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.game.gameActivity.GameActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.choosePlayers.ChoosePlayerActivity"

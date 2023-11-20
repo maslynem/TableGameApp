@@ -3,11 +3,11 @@ package ru.maslynem.songquizapp.presentation.choosePlayers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.songquizapp.domain.player.AddPlayerUseCase
-import ru.maslynem.songquizapp.domain.player.DeletePlayerUseCase
-import ru.maslynem.songquizapp.domain.player.EditPlayerUseCase
-import ru.maslynem.songquizapp.domain.player.GetPlayerListUseCase
-import ru.maslynem.songquizapp.domain.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.Player
+import ru.maslynem.songquizapp.domain.playerUseCase.AddPlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.DeletePlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.EditPlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.GetPlayerListUseCase
 
 class ChoosePlayerViewModel(
     private val addPlayerUseCase: AddPlayerUseCase,

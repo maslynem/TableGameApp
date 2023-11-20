@@ -1,10 +1,10 @@
 package ru.maslynem.songquizapp.di.choosePlayer
 
 import org.koin.dsl.module
-import ru.maslynem.songquizapp.domain.player.AddPlayerUseCase
-import ru.maslynem.songquizapp.domain.player.DeletePlayerUseCase
-import ru.maslynem.songquizapp.domain.player.EditPlayerUseCase
-import ru.maslynem.songquizapp.domain.player.GetPlayerListUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.AddPlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.DeletePlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.EditPlayerUseCase
+import ru.maslynem.songquizapp.domain.playerUseCase.GetPlayerListUseCase
 
 val choosePlayerDomainModule = module {
     factory<AddPlayerUseCase> { AddPlayerUseCase(playerListRepository = get()) }

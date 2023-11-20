@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.game
+package ru.maslynem.songquizapp.presentation.game.gameActivity
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.domain.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.Player
 
 class PlayerScoreListAdapter :
     RecyclerView.Adapter<PlayerScoreListAdapter.PlayerScoreViewHolder>() {

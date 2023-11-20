@@ -1,7 +1,6 @@
-package ru.maslynem.songquizapp.presentation.game
+package ru.maslynem.songquizapp.domain.entity.topic
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.maslynem.songquizapp.domain.topic.Topic
 
 class TopicDiffCallback : DiffUtil.ItemCallback<Topic>() {
     override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {

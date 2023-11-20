@@ -2,21 +2,20 @@ package ru.maslynem.songquizapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.maslynem.songquizapp.domain.player.Player
-import ru.maslynem.songquizapp.domain.player.PlayerListRepository
+import ru.maslynem.songquizapp.domain.entity.player.Player
+import ru.maslynem.songquizapp.domain.playerUseCase.PlayerListRepository
 
 class PlayerListRepositoryImpl : PlayerListRepository {
     private val playerListLD = MutableLiveData<List<Player>>()
     private val playerSet = mutableSetOf<Player>()
     private var autoIncrementId = 0
 
-    init {
-        updateList()
-    }
-
     override fun getPlayerList(): LiveData<List<Player>> {
+        resetPlayerScore()
+        updateList()
         return playerListLD
     }
+
 
     override fun addPlayer(player: Player) {
         if (player.id == Player.UNDEFINED_ID) {
@@ -39,5 +38,9 @@ class PlayerListRepositoryImpl : PlayerListRepository {
 
     private fun updateList() {
         playerListLD.value = playerSet.toList()
+    }
+
+    private fun resetPlayerScore() {
+        playerSet.forEach { player: Player -> player.score = Player.DEFAULT_SCORE }
     }
 }

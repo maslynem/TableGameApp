@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.domain.player.Player
+import ru.maslynem.songquizapp.domain.entity.player.Player
 
 class PlayerDialogFragment : DialogFragment() {
 

@@ -1,4 +1,4 @@
-package ru.maslynem.songquizapp.presentation.game
+package ru.maslynem.songquizapp.presentation.game.gameActivity
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.domain.topic.Topic
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
+import ru.maslynem.songquizapp.domain.entity.topic.TopicDiffCallback
 
 
 class TopicWithCardNumberListAdapter :
@@ -33,6 +34,7 @@ class TopicWithCardNumberListAdapter :
         val topic = getItem(position)
         holder.topicCardCount.text = topic.cardNumber.toString()
         holder.topicName.text = topic.name.uppercase()
+        holder.topicName.setOnClickListener { onTopicClick?.invoke(topic) }
     }
 
     override fun onViewRecycled(holder: TopicWithCardNumberViewHolder) {

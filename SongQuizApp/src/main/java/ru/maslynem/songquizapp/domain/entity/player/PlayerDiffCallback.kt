@@ -1,7 +1,6 @@
-package ru.maslynem.songquizapp.presentation.choosePlayers
+package ru.maslynem.songquizapp.domain.entity.player
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.maslynem.songquizapp.domain.player.Player
 
 class PlayerDiffCallback: DiffUtil.ItemCallback<Player>() {
     override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {

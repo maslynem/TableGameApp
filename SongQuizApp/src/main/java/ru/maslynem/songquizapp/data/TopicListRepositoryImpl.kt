@@ -2,8 +2,8 @@ package ru.maslynem.songquizapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.maslynem.songquizapp.domain.topic.Topic
-import ru.maslynem.songquizapp.domain.topic.TopicListRepository
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
+import ru.maslynem.songquizapp.domain.topicUseCase.TopicListRepository
 
 class TopicListRepositoryImpl : TopicListRepository {
     private var topicList = mutableListOf<Topic>()

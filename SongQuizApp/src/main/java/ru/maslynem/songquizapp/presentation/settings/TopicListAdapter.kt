@@ -8,7 +8,6 @@ import android.widget.CheckBox
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
-import ru.maslynem.songquizapp.presentation.settings.topic.TopicCheckBox
 
 class TopicListAdapter :
     RecyclerView.Adapter<TopicListAdapter.TopicViewHolder>() {

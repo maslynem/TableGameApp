@@ -3,9 +3,8 @@ package ru.maslynem.songquizapp.presentation.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.maslynem.songquizapp.domain.topic.GetTopicListUseCase
-import ru.maslynem.songquizapp.domain.topic.Topic
-import ru.maslynem.songquizapp.presentation.settings.topic.TopicCheckBox
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
+import ru.maslynem.songquizapp.domain.topicUseCase.GetTopicListUseCase
 
 class SettingsViewModel(private val getTopicListUseCase: GetTopicListUseCase) : ViewModel() {
 
