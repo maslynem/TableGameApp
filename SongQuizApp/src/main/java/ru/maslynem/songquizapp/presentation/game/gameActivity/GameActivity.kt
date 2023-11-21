@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivityGameBinding
+import ru.maslynem.songquizapp.presentation.game.cardActivity.CardActivity
 
 
 class GameActivity : AppCompatActivity() {
@@ -45,7 +46,9 @@ class GameActivity : AppCompatActivity() {
         topicWithCardNumberListAdapter = TopicWithCardNumberListAdapter()
         binding.rvTopicWithCard?.adapter = topicWithCardNumberListAdapter
         topicWithCardNumberListAdapter.onTopicClick = {
-
+            val intent =
+                CardActivity.newIntent(this, it, this.intent.getIntExtra(EXTRA_TIME, DEFAULT_TIME))
+            startActivity(intent)
         }
 
         playerScoreListAdapter = PlayerScoreListAdapter()
@@ -88,6 +91,7 @@ class GameActivity : AppCompatActivity() {
         private const val EXTRA_TOPIC_LIST = "extra_topic_list"
         private const val EXTRA_CARD_NUMBER = "extra_card_number"
         private const val EXTRA_TIME = "extra_time"
+        private const val DEFAULT_TIME = 90
         const val UNDEFINED_CARD_NUMBER = -1
 
         fun newIntent(

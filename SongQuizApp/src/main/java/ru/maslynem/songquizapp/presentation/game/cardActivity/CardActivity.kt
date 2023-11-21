@@ -17,8 +17,8 @@ class CardActivity : AppCompatActivity() {
         binding = ActivityCardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         validateIntent()
+        addObserversToViewModel()
         initializeViewModel()
-
     }
 
     private fun validateIntent() {
@@ -34,6 +34,12 @@ class CardActivity : AppCompatActivity() {
         val topic = intent.getParcelableExtra<Topic>(EXTRA_TOPIC)!!
         val time = intent.getIntExtra(EXTRA_TIME, DEFAULT_TIME)
         cardViewModel.initialize(topic, time)
+    }
+
+    private fun addObserversToViewModel() {
+        cardViewModel.timeInSec.observe(this) {
+            binding.tvTimerTime.text = it.toString()
+        }
     }
 
     companion object {

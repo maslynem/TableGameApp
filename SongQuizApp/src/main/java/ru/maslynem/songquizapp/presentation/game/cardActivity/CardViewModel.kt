@@ -1,6 +1,8 @@
 package ru.maslynem.songquizapp.presentation.game.cardActivity
 
 import android.os.CountDownTimer
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.maslynem.songquizapp.domain.cardUseCase.GetCardByTopicUseCase
 import ru.maslynem.songquizapp.domain.cardUseCase.RemoveCardUseCase
@@ -18,23 +20,35 @@ class CardViewModel(
 
     private lateinit var card: Card
     private lateinit var timer: CountDownTimer
+    private var _timeInSec = MutableLiveData<Int>()
+    val timeInSec: LiveData<Int>
+        get() = _timeInSec
 
+    private var _timeFinish = MutableLiveData<Unit>()
+    val timeFinish: LiveData<Unit>
+        get() = _timeFinish
 
     fun initialize(topic: Topic, time: Int) {
         this.card = getCardByTopicUseCase.getCardByTopic(topic)
-
+        initializeTimer(time)
     }
 
     private fun initializeTimer(time: Int) {
+        _timeInSec.value = time
         timer = object : CountDownTimer(time * 1000L, COUNT_DOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
-                TODO("Not yet implemented")
+                _timeInSec.value = (millisUntilFinished / 1_000).toInt()
             }
 
             override fun onFinish() {
-                TODO("Not yet implemented")
+                _timeFinish.value = Unit
+                timer.cancel()
             }
         }
+    }
+
+    fun startTimer() {
+        timer.start()
     }
 
     companion object {

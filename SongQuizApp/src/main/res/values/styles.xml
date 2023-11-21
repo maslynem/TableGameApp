@@ -56,5 +56,9 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="TimerTimeTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">50sp</item>
+    </style>
+
 
 </resources>

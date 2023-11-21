@@ -6,36 +6,100 @@
     android:layout_height="match_parent"
     tools:context=".presentation.game.cardActivity.CardActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/h_guideline_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.2" />
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h_guideline_40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.5">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h_guideline_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v_guideline_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v_guideline_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/h_guideline_40"
+        app:layout_constraintEnd_toStartOf="@+id/v_guideline_85"
+        app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
+        app:layout_constraintTop_toTopOf="@+id/h_guideline_20">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Строитель" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Строитель"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-66dp" />
 
     </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_timer_time"
+        style="@style/TimerTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60"
+        app:layout_constraintBottom_toTopOf="@+id/h_guideline_50"
+        app:layout_constraintEnd_toStartOf="@+id/v_guideline_85"
+        app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
+        app:layout_constraintTop_toTopOf="@+id/h_guideline_50" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_timer_time"
+        app:layout_constraintEnd_toStartOf="@+id/v_guideline_85"
+        app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
+        android:layout_marginTop="25dp">
+
+        <Button
+            android:id="@+id/btn_guessed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guessed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_start_timer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_start_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_guessed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
