@@ -1,12 +1,14 @@
 package ru.maslynem.songquizapp.presentation.game.cardActivity
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.maslynem.songquizapp.domain.cardUseCase.GetCardByTopicUseCase
 import ru.maslynem.songquizapp.domain.cardUseCase.RemoveCardUseCase
 import ru.maslynem.songquizapp.domain.entity.game.Card
+import ru.maslynem.songquizapp.domain.entity.player.Player
 import ru.maslynem.songquizapp.domain.entity.topic.Topic
 import ru.maslynem.songquizapp.domain.playerUseCase.EditPlayerUseCase
 import ru.maslynem.songquizapp.domain.playerUseCase.GetPlayerListUseCase
@@ -18,18 +20,27 @@ class CardViewModel(
     private val getPlayerListUseCase: GetPlayerListUseCase
 ) : ViewModel() {
 
-    private lateinit var card: Card
+    private val _card: MutableLiveData<Card> = MutableLiveData()
+    val card: LiveData<Card>
+        get() = _card
+
     private lateinit var timer: CountDownTimer
-    private var _timeInSec = MutableLiveData<Int>()
+    private val _timeInSec = MutableLiveData<Int>()
     val timeInSec: LiveData<Int>
         get() = _timeInSec
 
-    private var _timeFinish = MutableLiveData<Unit>()
+    private val _timeFinish = MutableLiveData<Unit>()
     val timeFinish: LiveData<Unit>
         get() = _timeFinish
 
+    private val _shouldFinishActivity = MutableLiveData<Unit>()
+    val shouldFinishActivity: LiveData<Unit>
+        get() = _shouldFinishActivity
+
+    private val winPlayerSet: MutableSet<Player> = mutableSetOf()
+
     fun initialize(topic: Topic, time: Int) {
-        this.card = getCardByTopicUseCase.getCardByTopic(topic)
+        _card.value = getCardByTopicUseCase.getCardByTopic(topic)
         initializeTimer(time)
     }
 
@@ -47,9 +58,37 @@ class CardViewModel(
         }
     }
 
+    fun getPlayerList(): List<Player> {
+        return getPlayerListUseCase.getPlayerList().value ?: emptyList()
+    }
+
+    fun addWinPlayer(player: Player) {
+        winPlayerSet.add(player)
+    }
+
+    fun removeWinPlayer(player: Player) {
+        winPlayerSet.remove(player)
+    }
+
+    fun addScoreToWinPlayer() {
+        Log.d("CardActivity", "winPlayerSet $winPlayerSet")
+        for (player: Player in winPlayerSet) {
+            val copy = player.copy(score = player.score + 1)
+            editPlayerUseCase.editPlayer(copy)
+        }
+        winPlayerSet.clear()
+        removeCardUseCase.removeCard(_card.value!!)
+        _shouldFinishActivity.value = Unit
+    }
+
     fun startTimer() {
         timer.start()
     }
+
+    fun stopTimer() {
+        timer.cancel()
+    }
+
 
     companion object {
         const val COUNT_DOWN_INTERVAL = 500L

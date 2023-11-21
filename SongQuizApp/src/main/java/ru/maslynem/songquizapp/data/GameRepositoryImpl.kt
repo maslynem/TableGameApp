@@ -27,7 +27,7 @@ class GameRepositoryImpl : GameRepository {
                 val tempCardList: MutableList<Card> = mutableListOf()
                 val topic = Topic(topicName, cardNumber)
                 for (i in 0..cardNumber) {
-                    tempCardList.add(Card(topic = topic, word = "$topic$i"))
+                    tempCardList.add(Card(topic = topic, word = "${topic.name}$i"))
                 }
                 put(topic, tempCardList)
             }

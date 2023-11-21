@@ -3,6 +3,7 @@ package ru.maslynem.songquizapp.di
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import ru.maslynem.songquizapp.presentation.choosePlayers.ChoosePlayerViewModel
+import ru.maslynem.songquizapp.presentation.game.cardActivity.CardViewModel
 import ru.maslynem.songquizapp.presentation.game.gameActivity.GameViewModel
 import ru.maslynem.songquizapp.presentation.settings.SettingsViewModel
 
@@ -24,8 +25,16 @@ val appModule = module {
     viewModel<GameViewModel> {
         GameViewModel(
             getPlayerListUseCase = get(),
-            getTopicWithCardNumberUseCase = get(),
-            removeCardUseCase = get()
+            getTopicWithCardNumberUseCase = get()
+        )
+    }
+
+    viewModel<CardViewModel>() {
+        CardViewModel(
+            getCardByTopicUseCase = get(),
+            removeCardUseCase = get(),
+            editPlayerUseCase = get(),
+            getPlayerListUseCase = get()
         )
     }
 }

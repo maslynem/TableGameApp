@@ -2,15 +2,26 @@ package ru.maslynem.songquizapp.presentation.game.cardActivity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BlurMaskFilter
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.RingtoneManager
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivityCardBinding
+import ru.maslynem.songquizapp.domain.entity.player.Player
 import ru.maslynem.songquizapp.domain.entity.topic.Topic
+
 
 class CardActivity : AppCompatActivity() {
     private val cardViewModel by viewModel<CardViewModel>()
     private lateinit var binding: ActivityCardBinding
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +30,44 @@ class CardActivity : AppCompatActivity() {
         validateIntent()
         addObserversToViewModel()
         initializeViewModel()
+        initializeMediaPlayer()
+        setupBtnListener()
+        setBlurOnCard()
+    }
+
+
+    private fun setupBtnListener() {
+        binding.btnStartTimer.setOnClickListener {
+            cardViewModel.startTimer()
+            binding.btnStopTimer.isEnabled = true
+            binding.btnGuessed.isEnabled = true
+            binding.btnStartTimer.isEnabled = false
+            delBlurFromCard()
+
+        }
+
+        binding.btnStopTimer.setOnClickListener {
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
+            }
+            cardViewModel.stopTimer()
+            binding.btnStartTimer.isEnabled = true
+            binding.btnStopTimer.isEnabled = false
+            setBlurOnCard()
+
+        }
+        binding.btnGuessed.setOnClickListener {
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
+            }
+            cardViewModel.stopTimer()
+            showWinPlayerDialog()
+        }
+    }
+
+    override fun onDestroy() {
+        mediaPlayer.release()
+        super.onDestroy()
     }
 
     private fun validateIntent() {
@@ -36,10 +85,79 @@ class CardActivity : AppCompatActivity() {
         cardViewModel.initialize(topic, time)
     }
 
+    private fun initializeMediaPlayer() {
+        val defaultRingtoneUri =
+            RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.setDataSource(this, defaultRingtoneUri)
+        val audioAttributes =
+            AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
+                .build()
+        mediaPlayer.setAudioAttributes(audioAttributes)
+        mediaPlayer.prepare()
+    }
+
     private fun addObserversToViewModel() {
         cardViewModel.timeInSec.observe(this) {
             binding.tvTimerTime.text = it.toString()
         }
+
+        cardViewModel.timeFinish.observe(this) {
+            mediaPlayer.start()
+        }
+
+        cardViewModel.shouldFinishActivity.observe(this) {
+            finish()
+        }
+
+        cardViewModel.card.observe(this) {
+            binding.tvCard.text = it.word
+        }
+    }
+
+    private fun showWinPlayerDialog() {
+        val playerList = cardViewModel.getPlayerList()
+        Log.d("CardActivity", "$playerList")
+        if (playerList.isEmpty())
+            return
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder
+            .setTitle(getString(R.string.winners))
+            .setPositiveButton("Positive") { dialog, which ->
+                cardViewModel.addScoreToWinPlayer()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Negative") { dialog, which ->
+                dialog.cancel()
+            }
+            .setMultiChoiceItems(
+                playerList.map(Player::playerName).toTypedArray(), null
+            ) { _, which, isChecked ->
+                Log.d("CardActivity", "${playerList[which]}")
+                if (isChecked) {
+                    cardViewModel.addWinPlayer(player = playerList[which])
+                } else {
+                    cardViewModel.removeWinPlayer(player = playerList[which])
+                }
+            }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun setBlurOnCard() {
+        binding.tvCard.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+        val radius = binding.tvCard.textSize / 3
+        val filter = BlurMaskFilter(radius, BlurMaskFilter.Blur.NORMAL)
+        binding.tvCard.paint.maskFilter = filter
+    }
+
+    private fun delBlurFromCard() {
+        binding.tvCard.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+        binding.tvCard.paint.maskFilter = null
     }
 
     companion object {
