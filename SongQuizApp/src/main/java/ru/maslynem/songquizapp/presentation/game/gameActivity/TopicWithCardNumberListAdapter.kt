@@ -1,22 +1,26 @@
 package ru.maslynem.songquizapp.presentation.game.gameActivity
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.domain.entity.topic.Topic
-import ru.maslynem.songquizapp.domain.entity.topic.TopicDiffCallback
 
 
 class TopicWithCardNumberListAdapter :
-    ListAdapter<Topic, TopicWithCardNumberListAdapter.TopicWithCardNumberViewHolder>(
-        TopicDiffCallback()
-    ) {
+    RecyclerView.Adapter<TopicWithCardNumberListAdapter.TopicWithCardNumberViewHolder>() {
 
     var onTopicClick: ((topic: Topic) -> Unit)? = null
+
+    var topicList: List<Topic> = listOf()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,8 +34,11 @@ class TopicWithCardNumberListAdapter :
         return TopicWithCardNumberViewHolder(view)
     }
 
+    override fun getItemCount(): Int = topicList.size
+
+
     override fun onBindViewHolder(holder: TopicWithCardNumberViewHolder, position: Int) {
-        val topic = getItem(position)
+        val topic = topicList[position]
         holder.topicCardCount.text = topic.cardNumber.toString()
         holder.topicName.text = topic.name.uppercase()
         holder.topicName.setOnClickListener { onTopicClick?.invoke(topic) }

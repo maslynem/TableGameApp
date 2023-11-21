@@ -3,6 +3,7 @@
     <string name="add">Добавить</string>
     <string name="edit">Изменить</string>
     <string name="cansel">Отменить</string>
+    <string name="ok">OK</string>
     <string name="next">Далее</string>
     <string name="name">Имя</string>
     <string name="topic_number">Количество категорий:</string>

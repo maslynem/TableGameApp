@@ -71,7 +71,7 @@ class CardViewModel(
     }
 
     fun addScoreToWinPlayer() {
-        Log.d("CardActivity", "winPlayerSet $winPlayerSet")
+        Log.d("Activity", "winPlayerSet $winPlayerSet")
         for (player: Player in winPlayerSet) {
             val copy = player.copy(score = player.score + 1)
             editPlayerUseCase.editPlayer(copy)

@@ -120,24 +120,24 @@ class CardActivity : AppCompatActivity() {
 
     private fun showWinPlayerDialog() {
         val playerList = cardViewModel.getPlayerList()
-        Log.d("CardActivity", "$playerList")
+        Log.d("Activity", "$playerList")
         if (playerList.isEmpty())
             return
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder
             .setTitle(getString(R.string.winners))
-            .setPositiveButton("Positive") { dialog, which ->
+            .setPositiveButton(getString(R.string.ok)) { dialog, which ->
                 cardViewModel.addScoreToWinPlayer()
                 dialog.dismiss()
             }
-            .setNegativeButton("Negative") { dialog, which ->
+            .setNegativeButton(getString(R.string.cansel)) { dialog, which ->
                 dialog.cancel()
             }
             .setMultiChoiceItems(
                 playerList.map(Player::playerName).toTypedArray(), null
             ) { _, which, isChecked ->
-                Log.d("CardActivity", "${playerList[which]}")
+                Log.d("Activity", "${playerList[which]}")
                 if (isChecked) {
                     cardViewModel.addWinPlayer(player = playerList[which])
                 } else {

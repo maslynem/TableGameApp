@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,7 +35,8 @@ class GameActivity : AppCompatActivity() {
 
     private fun addObserversToViewModel() {
         gameViewModel.topicWithCardNumberList.observe(this) {
-            topicWithCardNumberListAdapter.submitList(it)
+            Log.d("Activity", "topic List $it")
+            topicWithCardNumberListAdapter.topicList = it
         }
 
         gameViewModel.playerList.observe(this) {
