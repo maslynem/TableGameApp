@@ -7,21 +7,21 @@
     tools:context=".presentation.game.cardActivity.CardActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h_guideline_20"
+        android:id="@+id/h_guideline_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h_guideline_40"
+        android:id="@+id/h_guideline_30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h_guideline_50"
+        android:id="@+id/h_guideline_45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -48,12 +48,13 @@
         app:cardCornerRadius="13dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/h_guideline_40"
+        app:layout_constraintBottom_toTopOf="@+id/h_guideline_30"
         app:layout_constraintEnd_toStartOf="@+id/v_guideline_85"
         app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
-        app:layout_constraintTop_toTopOf="@+id/h_guideline_20">
+        app:layout_constraintTop_toTopOf="@+id/h_guideline_10">
 
         <TextView
+            style="@style/CardViewTextView"
             android:id="@+id/tv_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -71,10 +72,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="60"
-        app:layout_constraintBottom_toTopOf="@+id/h_guideline_50"
+        app:layout_constraintBottom_toTopOf="@+id/h_guideline_45"
         app:layout_constraintEnd_toStartOf="@+id/v_guideline_85"
         app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
-        app:layout_constraintTop_toTopOf="@+id/h_guideline_50" />
+        app:layout_constraintTop_toTopOf="@+id/h_guideline_45" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_timers_btn"

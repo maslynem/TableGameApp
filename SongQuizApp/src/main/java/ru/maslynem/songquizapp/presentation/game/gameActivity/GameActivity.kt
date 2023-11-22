@@ -86,11 +86,18 @@ class GameActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         topicWithCardNumberListAdapter = TopicWithCardNumberListAdapter()
         binding.rvTopicWithCard?.adapter = topicWithCardNumberListAdapter
-        topicWithCardNumberListAdapter.onTopicClick = {
+        topicWithCardNumberListAdapter.onTopicClick = { topic, color ->
             val intent =
-                CardActivity.newIntent(this, it, this.intent.getIntExtra(EXTRA_TIME, DEFAULT_TIME))
+                CardActivity.newIntent(
+                    this,
+                    topic,
+                    color,
+                    this.intent.getIntExtra(EXTRA_TIME, DEFAULT_TIME)
+                )
             startActivity(intent)
         }
+        topicWithCardNumberListAdapter.colors = this.resources.getIntArray(R.array.colors)
+
 
         playerScoreListAdapter = PlayerScoreListAdapter()
         binding.rvPlayerScore?.adapter = playerScoreListAdapter

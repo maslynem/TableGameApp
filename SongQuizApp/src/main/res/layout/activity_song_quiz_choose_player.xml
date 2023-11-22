@@ -23,18 +23,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:listitem="@layout/player_item" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h_guideline_45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add"
         style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/custom_btn"
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +55,7 @@
         style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/custom_btn"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"

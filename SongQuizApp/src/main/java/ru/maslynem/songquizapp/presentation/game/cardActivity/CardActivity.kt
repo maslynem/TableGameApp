@@ -3,6 +3,7 @@ package ru.maslynem.songquizapp.presentation.game.cardActivity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BlurMaskFilter
+import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.RingtoneManager
@@ -33,6 +34,7 @@ class CardActivity : AppCompatActivity() {
         initializeMediaPlayer()
         setupBtnListener()
         setBlurOnCard()
+        binding.tvCard.setBackgroundColor(intent.getIntExtra(EXTRA_COLOR, DEFAULT_COLOR))
     }
 
 
@@ -165,11 +167,14 @@ class CardActivity : AppCompatActivity() {
         const val EXTRA_TIME = "extra_time"
         const val DEFAULT_TIME = 60
         const val EXTRA_TOPIC = "extra_topic"
+        const val EXTRA_COLOR = "extra_color"
+        const val DEFAULT_COLOR = Color.BLUE
 
-        fun newIntent(context: Context, topic: Topic, time: Int): Intent {
+        fun newIntent(context: Context, topic: Topic, color: Int, time: Int): Intent {
             val intent = Intent(context, CardActivity::class.java)
             intent.putExtra(EXTRA_TIME, time)
             intent.putExtra(EXTRA_TOPIC, topic)
+            intent.putExtra(EXTRA_COLOR, color)
             return intent
         }
     }

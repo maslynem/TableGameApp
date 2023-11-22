@@ -5,11 +5,13 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.domain.entity.player.Player
+
 
 class PlayerDialogFragment : DialogFragment() {
 
@@ -82,6 +84,7 @@ class PlayerDialogFragment : DialogFragment() {
             }
                 .create()
         } ?: throw IllegalStateException("Activity cannot be null")
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         return dialog
     }
 

@@ -5,4 +5,10 @@
     <color name="grey">#808080</color>
     <color name="transparent_grey">#4F858484</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="yellow_light">#FBE7C6</color>
+    <color name="mint">#B4F8C8</color>
+    <color name="tiffany_blue">#A0E7E5</color>
+    <color name="hot_pink">#FFAEBC</color>
+    <color name="teal">#29A0B1</color>
+    <color name="lilac">#EEB5EB</color>
 </resources>

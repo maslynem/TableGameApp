@@ -9,7 +9,7 @@
     app:cardUseCompatPadding="true">
 
     <FrameLayout
-        android:id="@+id/ll_topic_with_card"
+        android:id="@+id/fl_topic_with_card"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/check_box_disabled_background"
