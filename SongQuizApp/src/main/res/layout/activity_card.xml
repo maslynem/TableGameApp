@@ -86,10 +86,12 @@
         app:layout_constraintStart_toStartOf="@+id/v_guideline_15"
         app:layout_constraintTop_toBottomOf="@id/tv_timer_time">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_stop_timer"
+            style="@style/CustomButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:enabled="false"
             android:text="@string/stop"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,10 +100,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_start_timer"
+            style="@style/CustomButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="@string/start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,10 +114,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_guessed"
+        style="@style/CustomButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_btn"
         android:enabled="false"
         android:text="@string/guessed"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,9 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="Base.Theme.MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
-    </style>
+    <style name="SongQuizBaseTheme" parent="Theme.Material3.Light.NoActionBar"></style>
 
-    <style name="Theme.SongQuizTheme" parent="Base.Theme.MainActivity">
+    <style name="Theme.SongQuizTheme" parent="SongQuizBaseTheme">
         <item name="android:windowBackground">@drawable/song_quiz_app_background</item>
     </style>
+
 </resources>
