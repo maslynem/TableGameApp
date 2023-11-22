@@ -7,7 +7,7 @@ import ru.maslynem.songquizapp.domain.playerUseCase.PlayerListRepository
 
 class PlayerListRepositoryImpl : PlayerListRepository {
     private val playerListLD = MutableLiveData<List<Player>>()
-    private val playerSet = mutableSetOf<Player>()
+    private val playerList = mutableListOf<Player>()
     private var autoIncrementId = 0
 
     override fun getPlayerList(): LiveData<List<Player>> {
@@ -20,26 +20,26 @@ class PlayerListRepositoryImpl : PlayerListRepository {
         if (player.id == Player.UNDEFINED_ID) {
             player.id = ++autoIncrementId
         }
-        playerSet.add(player)
+        playerList.add(player)
         updateList()
     }
 
     override fun editPlayer(player: Player) {
-        val oldElement = playerSet.find { it.id == player.id }
-        playerSet.remove(oldElement)
+        val oldElement = playerList.find { it.id == player.id }
+        playerList.remove(oldElement)
         addPlayer(player)
     }
 
     override fun deletePlayer(player: Player) {
-        playerSet.remove(player)
+        playerList.remove(player)
         updateList()
     }
 
     private fun updateList() {
-        playerListLD.value = playerSet.toList()
+        playerListLD.value = playerList.toList()
     }
 
     override fun resetPlayerScore() {
-        playerSet.forEach { player: Player -> player.score = Player.DEFAULT_SCORE }
+        playerList.forEach { player: Player -> player.score = Player.DEFAULT_SCORE }
     }
 }

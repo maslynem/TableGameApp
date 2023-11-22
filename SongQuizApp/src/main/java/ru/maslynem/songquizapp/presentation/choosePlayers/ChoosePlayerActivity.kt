@@ -1,7 +1,6 @@
 package ru.maslynem.songquizapp.presentation.choosePlayers
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -70,7 +69,6 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
 
     private fun addObserversToViewModel() {
         choosePlayerViewModel.playerList.observe(this) {
-            Log.d("activity", "$it")
             playerListAdapter.submitList(it)
         }
 
@@ -91,11 +89,9 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
 
     private fun setupNextButtonClick() {
         binding.btnNext.setOnClickListener {
-            val playerList = choosePlayerViewModel.playerList.value
-            playerList?.let {
-                val intent = SettingsActivity.newIntent(this)
-                startActivity(intent)
-            }
+
+            val intent = SettingsActivity.newIntent(this)
+            startActivity(intent)
         }
     }
 
@@ -103,6 +99,7 @@ class ChoosePlayerActivity : AppCompatActivity(), PlayerDialogFragment.NoticeDia
         val dialog = PlayerDialogFragment.newInstanceAddPlayer()
         dialog.show(supportFragmentManager, "addPlayerDialogFragment")
     }
+
     private fun showEditPlayerDialogFragment(player: Player) {
         val dialog = PlayerDialogFragment.newInstanceEditPlayer(player)
         dialog.show(supportFragmentManager, "editPlayerDialogFragment")
