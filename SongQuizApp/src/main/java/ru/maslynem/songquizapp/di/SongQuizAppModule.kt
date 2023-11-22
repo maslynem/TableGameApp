@@ -25,7 +25,8 @@ val appModule = module {
     viewModel<GameViewModel> {
         GameViewModel(
             getPlayerListUseCase = get(),
-            getTopicWithCardNumberUseCase = get()
+            getTopicWithCardNumberUseCase = get(),
+            resetPlayerScoreUseCase = get()
         )
     }
 

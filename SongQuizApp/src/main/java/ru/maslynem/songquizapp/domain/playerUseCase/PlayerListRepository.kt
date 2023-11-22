@@ -6,6 +6,9 @@ import ru.maslynem.songquizapp.domain.entity.player.Player
 interface PlayerListRepository {
     fun getPlayerList(): LiveData<List<Player>>
     fun addPlayer(player: Player)
+
+    fun resetPlayerScore()
+
     fun editPlayer(player: Player)
     fun deletePlayer(player: Player)
 }

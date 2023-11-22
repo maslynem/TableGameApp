@@ -11,7 +11,6 @@ class PlayerListRepositoryImpl : PlayerListRepository {
     private var autoIncrementId = 0
 
     override fun getPlayerList(): LiveData<List<Player>> {
-        resetPlayerScore()
         updateList()
         return playerListLD
     }
@@ -40,7 +39,7 @@ class PlayerListRepositoryImpl : PlayerListRepository {
         playerListLD.value = playerSet.toList()
     }
 
-    private fun resetPlayerScore() {
+    override fun resetPlayerScore() {
         playerSet.forEach { player: Player -> player.score = Player.DEFAULT_SCORE }
     }
 }
