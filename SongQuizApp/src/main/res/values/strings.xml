@@ -25,4 +25,5 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="score">Счет</string>
+    <string name="results">Результаты</string>
 </resources>

@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog.Builder
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.databinding.ActivityGameBinding
+import ru.maslynem.songquizapp.domain.entity.player.Player
+import ru.maslynem.songquizapp.domain.entity.topic.Topic
 import ru.maslynem.songquizapp.presentation.game.cardActivity.CardActivity
 
 
@@ -34,12 +37,50 @@ class GameActivity : AppCompatActivity() {
 
     private fun addObserversToViewModel() {
         gameViewModel.topicWithCardNumberList.observe(this) {
-            topicWithCardNumberListAdapter.topicList = it
+            if (isGameOver(it)) {
+                showResultDialog()
+            } else {
+                topicWithCardNumberListAdapter.topicList = it
+            }
         }
 
         gameViewModel.playerList.observe(this) {
             playerScoreListAdapter.playerList = it
         }
+    }
+
+    private fun showResultDialog() {
+        var playerList = gameViewModel.getPlayerList()
+        if (playerList.isEmpty())
+            return
+
+        val results = arrayListOf<String>()
+        playerList = playerList.sortedByDescending(Player::score)
+        for (player in playerList) {
+            results.add("${player.playerName} : ${player.score}")
+        }
+
+        val builder = Builder(this)
+        builder
+            .setTitle(getString(R.string.results))
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+                this@GameActivity.finish()
+                dialog.cancel()
+            }
+            .setItems(results.toTypedArray()) { _, _ -> }
+        val dialog: androidx.appcompat.app.AlertDialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+    }
+
+
+    private fun isGameOver(topics: List<Topic>): Boolean {
+        for (topic in topics) {
+            if (topic.cardNumber != 0) {
+                return false
+            }
+        }
+        return true
     }
 
     private fun setupRecyclerView() {

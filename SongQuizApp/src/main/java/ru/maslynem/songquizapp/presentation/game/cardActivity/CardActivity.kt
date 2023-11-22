@@ -129,7 +129,7 @@ class CardActivity : AppCompatActivity() {
             .setTitle(getString(R.string.winners))
             .setPositiveButton(getString(R.string.ok)) { dialog, which ->
                 cardViewModel.addScoreToWinPlayer()
-                dialog.dismiss()
+                dialog.cancel()
             }
             .setNegativeButton(getString(R.string.cansel)) { dialog, which ->
                 dialog.cancel()
@@ -145,6 +145,7 @@ class CardActivity : AppCompatActivity() {
                 }
             }
         val dialog: AlertDialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
     }
 

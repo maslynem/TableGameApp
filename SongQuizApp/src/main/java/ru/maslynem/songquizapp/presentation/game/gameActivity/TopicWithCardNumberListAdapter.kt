@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.maslynem.songquizapp.R
 import ru.maslynem.songquizapp.domain.entity.topic.Topic
+import ru.maslynem.songquizapp.presentation.settings.TopicListAdapter
 
 
 class TopicWithCardNumberListAdapter :
@@ -26,8 +27,13 @@ class TopicWithCardNumberListAdapter :
         parent: ViewGroup,
         viewType: Int
     ): TopicWithCardNumberViewHolder {
+        val layout = when (viewType) {
+            TopicListAdapter.VIEW_TYPE_ENABLED -> R.layout.game_topic_with_card_item_enabled
+            TopicListAdapter.VIEW_TYPE_DISABLED -> R.layout.game_topic_with_card_item_disabled
+            else -> throw RuntimeException("Unknown view type $viewType")
+        }
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.game_topic_with_card_item_enabled,
+            layout,
             parent,
             false
         )
@@ -36,12 +42,19 @@ class TopicWithCardNumberListAdapter :
 
     override fun getItemCount(): Int = topicList.size
 
+    override fun getItemViewType(position: Int): Int {
+        val item = topicList[position]
+        return if (item.cardNumber != 0) {
+            TopicListAdapter.VIEW_TYPE_ENABLED
+        } else TopicListAdapter.VIEW_TYPE_DISABLED
+    }
 
     override fun onBindViewHolder(holder: TopicWithCardNumberViewHolder, position: Int) {
         val topic = topicList[position]
         holder.topicCardCount.text = topic.cardNumber.toString()
         holder.topicName.text = topic.name.uppercase()
         holder.topicName.setOnClickListener { onTopicClick?.invoke(topic) }
+        holder.topicName.isEnabled = topic.cardNumber != 0
     }
 
     override fun onViewRecycled(holder: TopicWithCardNumberViewHolder) {

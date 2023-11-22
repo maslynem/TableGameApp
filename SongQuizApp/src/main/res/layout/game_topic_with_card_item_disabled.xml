@@ -12,7 +12,7 @@
         android:id="@+id/ll_topic_with_card"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/topic_with_card_item_enabled_background"
+        android:background="@drawable/check_box_disabled_background"
         android:orientation="horizontal">
 
         <TextView

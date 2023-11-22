@@ -1,7 +1,6 @@
 package ru.maslynem.songquizapp.presentation.game.cardActivity
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -71,7 +70,6 @@ class CardViewModel(
     }
 
     fun addScoreToWinPlayer() {
-        Log.d("Activity", "winPlayerSet $winPlayerSet")
         for (player: Player in winPlayerSet) {
             val copy = player.copy(score = player.score + 1)
             editPlayerUseCase.editPlayer(copy)

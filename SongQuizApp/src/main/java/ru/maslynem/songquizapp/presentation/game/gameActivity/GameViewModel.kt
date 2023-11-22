@@ -27,4 +27,7 @@ class GameViewModel(
         resetPlayerScoreUseCase.resetPlayerScore()
     }
 
+    fun getPlayerList(): List<Player> {
+        return playerList.value ?: emptyList()
+    }
 }
