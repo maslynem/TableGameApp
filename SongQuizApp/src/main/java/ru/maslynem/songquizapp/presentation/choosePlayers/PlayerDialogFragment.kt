@@ -67,6 +67,7 @@ class PlayerDialogFragment : DialogFragment() {
                 }
             } else {
                 usernameEditText.setText(playerName, TextView.BufferType.EDITABLE)
+                usernameEditText.setSelection(usernameEditText.length())
                 builder = builder.setPositiveButton(R.string.edit) { _, _ ->
                     val username = usernameEditText.text.toString()
                     if (validateInputName(parseName(username))) {

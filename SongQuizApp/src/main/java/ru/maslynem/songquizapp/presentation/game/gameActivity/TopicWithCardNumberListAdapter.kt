@@ -53,12 +53,14 @@ class TopicWithCardNumberListAdapter :
 
     override fun onBindViewHolder(holder: TopicWithCardNumberViewHolder, position: Int) {
         val topic = topicList[position]
-        val color: Int = colors[position]
-        holder.frameLayout.setBackgroundColor(color)
-        holder.topicCardCount.text = topic.cardNumber.toString()
-        holder.topicName.text = topic.name.uppercase()
-        holder.topicName.setOnClickListener { onTopicClick?.invoke(topic, color) }
         holder.topicName.isEnabled = topic.cardNumber != 0
+        if (holder.topicName.isEnabled) {
+            val color: Int = colors[position]
+            holder.frameLayout.setBackgroundColor(color)
+            holder.topicName.setOnClickListener { onTopicClick?.invoke(topic, color) }
+        }
+        holder.topicName.text = topic.name.uppercase()
+        holder.topicCardCount.text = topic.cardNumber.toString()
     }
 
     override fun onViewRecycled(holder: TopicWithCardNumberViewHolder) {
